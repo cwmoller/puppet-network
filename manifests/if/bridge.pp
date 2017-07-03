@@ -9,6 +9,7 @@
 #   $mtu          - optional
 #   $ethtool_opts - optional
 #   $macaddress   - optional
+#   $vlan         - optional - defaults to false
 #
 # === Actions:
 #
@@ -34,11 +35,13 @@ define network::if::bridge (
   $bridge,
   $mtu = undef,
   $ethtool_opts = undef,
-  $macaddress = undef
+  $macaddress = undef,
+  $vlan = false,
 ) {
   # Validate our regular expressions
   $states = [ '^up$', '^down$' ]
   validate_re($ensure, $states, '$ensure must be either "up" or "down".')
+  validate_bool($vlan)
 
   if $macaddress == undef {
     $macaddy = '' # lint:ignore:empty_string_assignment
@@ -59,5 +62,6 @@ define network::if::bridge (
     mtu          => $mtu,
     ethtool_opts => $ethtool_opts,
     bridge       => $bridge,
+    vlan         => $vlan,
   }
 } # define network::if::bridge

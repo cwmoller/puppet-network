@@ -27,6 +27,7 @@
 #   $zone           - optional
 #   $metric         - optional
 #   $defroute       - optional
+#   $vlan           - optional - defaults to false
 #
 # === Actions:
 #
@@ -77,7 +78,8 @@ define network::if::static (
   $flush = false,
   $zone = undef,
   $defroute = undef,
-  $metric = undef
+  $metric = undef,
+  $vlan = false,
 ) {
   # Validate our data
   if ! is_ip_address($ipaddress) { fail("${ipaddress} is not an IP address.") }
@@ -100,6 +102,7 @@ define network::if::static (
   validate_bool($ipv6peerdns)
   validate_bool($manage_hwaddr)
   validate_bool($flush)
+  validate_bool($vlan)
 
   network_if_base { $title:
     ensure        => $ensure,
@@ -127,5 +130,6 @@ define network::if::static (
     zone          => $zone,
     defroute      => $defroute,
     metric        => $metric,
+    vlan          => $vlan,
   }
 } # define network::if::static

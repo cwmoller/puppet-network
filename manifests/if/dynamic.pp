@@ -18,6 +18,7 @@
 #   $zone            - optional
 #   $metric          - optional
 #   $defroute        - optional
+#   $vlan            - optional - defaults to false
 #
 # === Actions:
 #
@@ -58,7 +59,8 @@ define network::if::dynamic (
   $check_link_down = false,
   $defroute        = undef,
   $zone            = undef,
-  $metric          = undef
+  $metric          = undef,
+  $vlan            = false,
 ) {
   # Validate our regular expressions
   $states = [ '^up$', '^down$' ]
@@ -75,6 +77,7 @@ define network::if::dynamic (
   validate_bool($userctl)
   validate_bool($peerdns)
   validate_bool($manage_hwaddr)
+  validate_bool($vlan)
 
   network_if_base { $title:
     ensure          => $ensure,
@@ -94,5 +97,6 @@ define network::if::dynamic (
     defroute        => $defroute,
     zone            => $zone,
     metric          => $metric,
+    vlan            => $vlan,
   }
 } # define network::if::dynamic

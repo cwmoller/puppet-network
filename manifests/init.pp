@@ -130,7 +130,8 @@ define network_if_base (
   $flush           = false,
   $defroute        = undef,
   $zone            = undef,
-  $metric          = undef
+  $metric          = undef,
+  $vlan            = false,
 ) {
   # Validate our booleans
   validate_bool($userctl)
@@ -142,6 +143,7 @@ define network_if_base (
   validate_bool($check_link_down)
   validate_bool($manage_hwaddr)
   validate_bool($flush)
+  validate_bool($vlan)
   # Validate our regular expressions
   $states = [ '^up$', '^down$' ]
   validate_re($ensure, $states, '$ensure must be either "up" or "down".')

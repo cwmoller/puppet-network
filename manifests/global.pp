@@ -65,7 +65,6 @@ class network::global (
   $ipv6gateway    = undef,
   $ipv6defaultdev = undef,
   $nisdomain      = undef,
-  $vlan           = undef,
   $ipv6networking = false,
   $nozeroconf     = undef
 ) {
