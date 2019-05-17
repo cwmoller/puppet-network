@@ -8,4 +8,6 @@ CLONENUM_START=<%= @clonenum_start %>
 <% else %>NO_ALIASROUTING=yes
 <% end -%>
 ONPARENT=<%= @onparent %>
-NM_CONTROLLED=no
+<% if @nm_controlled %>NM_CONTROLLED=yes
+<% else %>NM_CONTROLLED=no
+<% end -%>
