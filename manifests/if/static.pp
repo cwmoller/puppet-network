@@ -29,6 +29,7 @@
 #   $metric         - optional
 #   $defroute       - optional
 #   $vlan           - optional - defaults to false
+#   $type           - optional
 #
 # === Actions:
 #
@@ -82,6 +83,7 @@ define network::if::static (
   $defroute = undef,
   $metric = undef,
   $vlan = false,
+  $type = undef,
 ) {
   # Validate our data
   if ! is_ip_address($ipaddress) { fail("${ipaddress} is not an IP address.") }
@@ -135,5 +137,6 @@ define network::if::static (
     defroute      => $defroute,
     metric        => $metric,
     vlan          => $vlan,
+    type          => $type,
   }
 } # define network::if::static

@@ -134,6 +134,7 @@ define network_if_base (
   $zone            = undef,
   $metric          = undef,
   $vlan            = false,
+  $type            = undef,
 ) {
   # Validate our booleans
   validate_bool($userctl)

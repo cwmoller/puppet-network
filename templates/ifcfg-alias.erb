@@ -4,7 +4,10 @@
 DEVICE=<%= @interface %>
 BOOTPROTO=<%= @bootproto %>
 ONPARENT=<%= @onparent %>
+<% if @type %>TYPE=<%= @type %>
+<% else %>
 TYPE=Ethernet
+<% end -%>
 <% if @ipaddress %>IPADDR=<%= @ipaddress %>
 <% end -%>
 <% if @netmask %>NETMASK=<%= @netmask %>
