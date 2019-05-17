@@ -31,7 +31,7 @@ class network {
     }
   }
 
-  service { 'network':
+  service { 'NetworkManager':
     ensure     => 'running',
     enable     => true,
     hasrestart => true,
@@ -188,7 +188,7 @@ define network_if_base (
       command     => "ip addr flush dev ${interface}",
       refreshonly => true,
       subscribe   => File["ifcfg-${interface}"],
-      before      => Service['network'],
+      before      => Service['NetworkManager'],
       path        => '/sbin:/usr/sbin',
     }
   }
@@ -200,6 +200,6 @@ define network_if_base (
     group   => 'root',
     path    => "/etc/sysconfig/network-scripts/ifcfg-${interface}",
     content => $iftemplate,
-    notify  => Service['network'],
+    notify  => Service['NetworkManager'],
   }
 } # define network_if_base

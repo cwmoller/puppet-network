@@ -116,6 +116,6 @@ define network::bridge::static (
     path    => "/etc/sysconfig/network-scripts/ifcfg-${interface}",
     content => template('network/ifcfg-br.erb'),
     require => Package['bridge-utils'],
-    notify  => Service['network'],
+    notify  => Service['NetworkManager'],
   }
 } # define network::bridge::static

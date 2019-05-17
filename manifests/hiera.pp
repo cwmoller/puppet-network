@@ -12,7 +12,7 @@
 #
 # === Requires:
 #
-#   Service['network']
+#   Service['NetworkManager']
 #
 # === Sample Usage:
 #

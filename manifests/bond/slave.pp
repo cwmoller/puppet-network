@@ -14,7 +14,7 @@
 #
 # === Requires:
 #
-#   Service['network']
+#   Service['NetworkManager']
 #
 # === Sample Usage:
 #
@@ -56,6 +56,6 @@ define network::bond::slave (
     path    => "/etc/sysconfig/network-scripts/ifcfg-${interface}",
     content => template('network/ifcfg-bond.erb'),
     before  => File["ifcfg-${master}"],
-    notify  => Service['network'],
+    notify  => Service['NetworkManager'],
   }
 } # define network::bond::slave

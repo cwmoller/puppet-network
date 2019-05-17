@@ -45,7 +45,7 @@ describe 'network::alias', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-bond2:1',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-bond2:1] with required contents' do
       verify_contents(catalogue, 'ifcfg-bond2:1', [
@@ -58,7 +58,7 @@ describe 'network::alias', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 
   context 'optional parameters' do
@@ -80,7 +80,7 @@ describe 'network::alias', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-bond3:2',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-bond3:2] with required contents' do
       verify_contents(catalogue, 'ifcfg-bond3:2', [
@@ -97,7 +97,7 @@ describe 'network::alias', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 
 end

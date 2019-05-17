@@ -32,7 +32,7 @@ describe 'network::bond::dynamic', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-bond2',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-bond2] with required contents' do
       verify_contents(catalogue, 'ifcfg-bond2', [
@@ -45,7 +45,7 @@ describe 'network::bond::dynamic', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
     it { should_not contain_augeas('modprobe.conf_bond2') }
 
     context 'on an older operatingsystem with /etc/modprobe.conf' do
@@ -114,7 +114,7 @@ describe 'network::bond::dynamic', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-bond2',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-bond2] with required contents' do
       verify_contents(catalogue, 'ifcfg-bond2', [
@@ -132,7 +132,7 @@ describe 'network::bond::dynamic', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
     it { should_not contain_augeas('modprobe.conf_bond2') }
   end
 

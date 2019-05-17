@@ -51,7 +51,7 @@ describe 'network::if::static', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-eth1',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-eth1] with required contents' do
       verify_contents(catalogue, 'ifcfg-eth1', [
@@ -67,7 +67,7 @@ describe 'network::if::static', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 
   context 'optional parameters' do
@@ -108,7 +108,7 @@ describe 'network::if::static', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-eth1',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-eth1] with required contents' do
       verify_contents(catalogue, 'ifcfg-eth1', [
@@ -141,7 +141,7 @@ describe 'network::if::static', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 
   context 'optional parameters - vlan' do
@@ -163,7 +163,7 @@ describe 'network::if::static', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-eth6.203',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-eth6.203] with required contents' do
       verify_contents(catalogue, 'ifcfg-eth6.203', [
@@ -178,7 +178,7 @@ describe 'network::if::static', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 
   context 'optional parameters - manage_hwaddr' do
@@ -201,7 +201,7 @@ describe 'network::if::static', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-eth0',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-eth0] with required contents' do
       verify_contents(catalogue, 'ifcfg-eth0', [
@@ -215,7 +215,7 @@ describe 'network::if::static', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 
   context 'flush => true - ip addr flush' do
@@ -232,7 +232,7 @@ describe 'network::if::static', :type => 'define' do
       :macaddress_eth1 => 'fe:fe:fe:aa:aa:aa',
     }
     end
-    it { should contain_exec('network-flush').with_command('ip addr flush dev eth1').that_comes_before('Service[network]') }
+    it { should contain_exec('network-flush').with_command('ip addr flush dev eth1').that_comes_before('Service[NetworkManager]') }
   end
 
 end

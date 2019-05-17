@@ -43,7 +43,7 @@ describe 'network::bridge', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-br1',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-br1] with required contents' do
       verify_contents(catalogue, 'ifcfg-br1', [
@@ -57,7 +57,7 @@ describe 'network::bridge', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
     it { should contain_package('bridge-utils') }
   end
 
@@ -81,7 +81,7 @@ describe 'network::bridge', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-br1',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-br1] with required contents' do
       verify_contents(catalogue, 'ifcfg-br1', [
@@ -95,7 +95,7 @@ describe 'network::bridge', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
     it { should contain_package('bridge-utils') }
   end
 

@@ -15,7 +15,7 @@
 # === Requires:
 #
 #   File["ifcfg-$name"]
-#   Service['network']
+#   Service['NetworkManager']
 #
 # === Sample Usage:
 #
@@ -61,6 +61,6 @@ define network::route (
     path    => "/etc/sysconfig/network-scripts/route-${interface}",
     content => template('network/route-eth.erb'),
     # before  => File["ifcfg-${interface}"],
-    notify  => Service['network'],
+    notify  => Service['NetworkManager'],
   }
 } # define network::route

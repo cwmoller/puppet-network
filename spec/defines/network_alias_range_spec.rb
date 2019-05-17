@@ -63,7 +63,7 @@ describe 'network::alias::range', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-eth99-range3',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-eth99-range3] with required contents' do
       verify_contents(catalogue, 'ifcfg-eth99-range3', [
@@ -75,7 +75,7 @@ describe 'network::alias::range', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 
   context 'required parameters: ensure => down' do
@@ -95,7 +95,7 @@ describe 'network::alias::range', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-bond7-range9',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-bond7-range9] with required contents' do
       verify_contents(catalogue, 'ifcfg-bond7-range9', [
@@ -107,7 +107,7 @@ describe 'network::alias::range', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 
   context 'required parameters: ensure => absent' do
@@ -123,9 +123,9 @@ describe 'network::alias::range', :type => 'define' do
     it { should contain_file('ifcfg-bond6-range9').with(
       :ensure => 'absent',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-bond6-range9',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 
   context 'optional parameters' do
@@ -145,7 +145,7 @@ describe 'network::alias::range', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-eth8-range9',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-eth8-range9] with required contents' do
       verify_contents(catalogue, 'ifcfg-eth8-range9', [
@@ -157,7 +157,7 @@ describe 'network::alias::range', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 
 end

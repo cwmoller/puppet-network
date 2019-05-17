@@ -17,7 +17,7 @@ describe 'network', :type => 'class' do
   context 'on a supported operatingsystem' do
     let(:facts) {{ :osfamily => 'RedHat' }}
 
-    it { should contain_service('network').with(
+    it { should contain_service('NetworkManager').with(
       :ensure     => 'running',
       :enable     => true,
       :hasrestart => true,

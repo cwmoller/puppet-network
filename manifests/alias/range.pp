@@ -72,6 +72,6 @@ define network::alias::range (
     path    => "/etc/sysconfig/network-scripts/ifcfg-${interface}-range${clonenum_start}",
     content => template('network/ifcfg-alias-range.erb'),
     before  => File["ifcfg-${interface}"],
-    notify  => Service['network'],
+    notify  => Service['NetworkManager'],
   }
 } # define network::alias::range
