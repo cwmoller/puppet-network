@@ -120,6 +120,7 @@ define network_if_base (
   $bonding_opts    = undef,
   $isalias         = false,
   $peerdns         = false,
+  $nm_controlled   = false,
   $ipv6peerdns     = false,
   $dns1            = undef,
   $dns2            = undef,
