@@ -12,6 +12,7 @@
 #   $ipv6gateway   - optional
 #   $userctl       - optional - defaults to false
 #   $peerdns       - optional
+#   $nm_controlled - optional - defaults to false
 #   $ipv6init      - optional - defaults to false
 #   $ipv6peerdns   - optional - defaults to false
 #   $dns1          - optional
@@ -58,6 +59,7 @@ define network::bridge::static (
   $bootproto = 'static',
   $userctl = false,
   $peerdns = false,
+  $nm_controlled = false,
   $ipv6init = false,
   $ipv6peerdns = false,
   $dns1 = undef,
@@ -81,6 +83,7 @@ define network::bridge::static (
   validate_bool($stp)
   validate_bool($ipv6init)
   validate_bool($ipv6peerdns)
+  validate_bool($nm_controlled)
 
   ensure_packages('bridge-utils')
 

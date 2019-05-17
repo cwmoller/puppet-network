@@ -64,6 +64,7 @@ class network {
 #   $bonding_opts    - optional
 #   $isalias         - optional
 #   $peerdns         - optional
+#   $nm_controlled   - optional - defaults to false
 #   $dns1            - optional
 #   $dns2            - optional
 #   $domain          - optional
@@ -137,6 +138,7 @@ define network_if_base (
   validate_bool($userctl)
   validate_bool($isalias)
   validate_bool($peerdns)
+  validate_bool($nm_controlled)
   validate_bool($ipv6init)
   validate_bool($ipv6autoconf)
   validate_bool($ipv6peerdns)

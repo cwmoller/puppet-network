@@ -38,4 +38,6 @@ DELAY=<%= @delay %>
 <% end -%>
 <% if @scope %>SCOPE="<%= @scope %>"
 <% end -%>
-NM_CONTROLLED=no
+<% if @nm_controlled %>NM_CONTROLLED=yes
+<% else %>NM_CONTROLLED=no
+<% end -%>

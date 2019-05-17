@@ -18,6 +18,7 @@
 #   $mtu            - optional
 #   $ethtool_opts   - optional
 #   $peerdns        - optional
+#   $nm_controlled  - optional - defaults to false
 #   $ipv6peerdns    - optional - defaults to false
 #   $dns1           - optional
 #   $dns2           - optional
@@ -69,6 +70,7 @@ define network::if::static (
   $mtu = undef,
   $ethtool_opts = undef,
   $peerdns = false,
+  $nm_controlled = false,
   $ipv6peerdns = false,
   $dns1 = undef,
   $dns2 = undef,
@@ -99,6 +101,7 @@ define network::if::static (
   validate_bool($ipv6init)
   validate_bool($ipv6autoconf)
   validate_bool($peerdns)
+  validate_bool($nm_controlled)
   validate_bool($ipv6peerdns)
   validate_bool($manage_hwaddr)
   validate_bool($flush)
@@ -120,6 +123,7 @@ define network::if::static (
     mtu           => $mtu,
     ethtool_opts  => $ethtool_opts,
     peerdns       => $peerdns,
+    nm_controlled => $nm_controlled,
     ipv6peerdns   => $ipv6peerdns,
     dns1          => $dns1,
     dns2          => $dns2,

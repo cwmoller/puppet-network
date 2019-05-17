@@ -13,6 +13,7 @@
 #   $dhcp_hostname   - optional
 #   $ethtool_opts    - optional
 #   $peerdns         - optional
+#   $nm_controlled   - optional - defaults to false
 #   $linkdelay       - optional
 #   $check_link_down - optional
 #   $zone            - optional
@@ -55,6 +56,7 @@ define network::if::dynamic (
   $dhcp_hostname   = undef,
   $ethtool_opts    = undef,
   $peerdns         = false,
+  $nm_controlled   = false,
   $linkdelay       = undef,
   $check_link_down = false,
   $defroute        = undef,
@@ -78,6 +80,7 @@ define network::if::dynamic (
   validate_bool($peerdns)
   validate_bool($manage_hwaddr)
   validate_bool($vlan)
+  validate_bool($nm_controlled)
 
   network_if_base { $title:
     ensure          => $ensure,
@@ -92,6 +95,7 @@ define network::if::dynamic (
     dhcp_hostname   => $dhcp_hostname,
     ethtool_opts    => $ethtool_opts,
     peerdns         => $peerdns,
+    nm_controlled   => $nm_controlled,
     linkdelay       => $linkdelay,
     check_link_down => $check_link_down,
     defroute        => $defroute,

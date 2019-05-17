@@ -82,6 +82,7 @@ describe 'network::if::static', :type => 'define' do
       :mtu          => '9000',
       :ethtool_opts => 'speed 1000 duplex full autoneg off',
       :peerdns      => true,
+      :nm_controlled => true,
       :dns1         => '3.4.5.6',
       :dns2         => '5.6.7.8',
       :domain       => 'somedomain.com',

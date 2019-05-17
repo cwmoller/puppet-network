@@ -47,6 +47,7 @@ define network::bond::static (
   $ethtool_opts = undef,
   $bonding_opts = 'miimon=100',
   $peerdns = false,
+  $nm_controlled = false,
   $ipv6init = false,
   $ipv6address = undef,
   $ipv6gateway = undef,
@@ -69,6 +70,7 @@ define network::bond::static (
   # Validate booleans
   validate_bool($ipv6init)
   validate_bool($ipv6peerdns)
+  validate_bool($nm_controlled)
 
 
   network_if_base { $title:
@@ -82,6 +84,7 @@ define network::bond::static (
     ethtool_opts => $ethtool_opts,
     bonding_opts => $bonding_opts,
     peerdns      => $peerdns,
+    nm_controlled => $nm_controlled,
     ipv6init     => $ipv6init,
     ipv6address  => $ipv6address,
     ipv6peerdns  => $ipv6peerdns,

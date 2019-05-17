@@ -59,6 +59,7 @@ describe 'network::if::dynamic', :type => 'define' do
       :dhcp_hostname   => 'hostname',
       :ethtool_opts    => 'speed 100 duplex full autoneg off',
       :peerdns         => true,
+      :nm_controlled   => true,
       :linkdelay       => '5',
       :check_link_down => true,
       :defroute        => 'yes',

@@ -121,6 +121,7 @@ describe 'network::bridge::static', :type => 'define' do
       :ipv6peerdns   => true,
       :userctl       => true,
       :peerdns       => true,
+      :nm_controlled => true,
       :dns1          => '3.4.5.6',
       :dns2          => '5.6.7.8',
       :domain        => 'somedomain.com',
