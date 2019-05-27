@@ -64,7 +64,9 @@ define network::bond::static (
 ) {
   # Validate our regular expressions
   $states = [ '^up$', '^down$' ]
-  validate_re($ensure, $states, '$ensure must be either "up" or "down".')
+  validate_legacy(
+    'Pattern', 'validate_re',
+    $ensure, $states, '$ensure must be either "up" or "down".')
   # Validate our data
   if $ipaddress {
     if ! is_ip_address($ipaddress) { fail("${ipaddress} is not an IP address.") }
@@ -73,8 +75,8 @@ define network::bond::static (
     if ! is_ip_address($ipv6address) { fail("${ipv6address} is not an IPv6 address.") }
   }
   # Validate booleans
-  validate_bool($ipv6init)
-  validate_bool($ipv6peerdns)
+  validate_legacy('Boolean', 'validate_bool', $ipv6init)
+  validate_legacy('Boolean', 'validate_bool', $ipv6peerdns)
 
   network_if_base { $title:
     ensure       => $ensure,

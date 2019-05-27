@@ -110,14 +110,14 @@ define network::if::static (
     $macaddy = $macaddress
   }
   # Validate booleans
-  validate_bool($userctl)
-  validate_bool($ipv6init)
-  validate_bool($ipv6autoconf)
-  validate_bool($peerdns)
-  validate_bool($ipv6peerdns)
-  validate_bool($manage_hwaddr)
-  validate_bool($flush)
-  validate_bool($arpcheck)
+  validate_legacy('Boolean', 'validate_bool', $userctl)
+  validate_legacy('Boolean', 'validate_bool', $ipv6init)
+  validate_legacy('Boolean', 'validate_bool', $ipv6autoconf)
+  validate_legacy('Boolean', 'validate_bool', $peerdns)
+  validate_legacy('Boolean', 'validate_bool', $ipv6peerdns)
+  validate_legacy('Boolean', 'validate_bool', $manage_hwaddr)
+  validate_legacy('Boolean', 'validate_bool', $flush)
+  validate_legacy('Boolean', 'validate_bool', $arpcheck)
 
   network_if_base { $title:
     ensure          => $ensure,

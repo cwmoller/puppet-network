@@ -46,11 +46,13 @@ define network::bridge::dynamic (
 ) {
   # Validate our regular expressions
   $states = [ '^up$', '^down$' ]
-  validate_re($ensure, $states, '$ensure must be either "up" or "down".')
+  validate_legacy(
+    'Pattern', 'validate_re', $ensure, $states,
+    '$ensure must be either "up" or "down".')
   # Validate booleans
-  validate_bool($userctl)
-  validate_bool($stp)
-  validate_bool($restart)
+  validate_legacy('Boolean', 'validate_bool', $userctl)
+  validate_legacy('Boolean', 'validate_bool', $stp)
+  validate_legacy('Boolean', 'validate_bool', $restart)
 
   ensure_packages(['bridge-utils'])
 

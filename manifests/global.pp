@@ -82,14 +82,16 @@ class network::global (
     if ! is_ip_address($ipv6gateway) { fail("${ipv6gateway} is not an IPv6 address.") }
   }
 
-  validate_bool($ipv6networking)
-  validate_bool($restart)
-  validate_bool($requestreopen)
+  validate_legacy('Boolean', 'validate_bool', $ipv6networking)
+  validate_legacy('Boolean', 'validate_bool', $restart)
+  validate_legacy('Boolean', 'validate_bool', $requestreopen)
 
   # Validate our regular expressions
   if $vlan {
     $states = [ '^yes$', '^no$' ]
-    validate_re($vlan, $states, '$vlan must be either "yes" or "no".')
+    validate_legacy(
+      'Pattern', 'validate_re', $vlan, $states,
+      '$vlan must be either "yes" or "no".')
   }
 
   include '::network'

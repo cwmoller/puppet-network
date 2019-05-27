@@ -55,8 +55,8 @@ define network::bond::slave (
     fail("${macaddress} is not a MAC address.")
   }
   # Validate our booleans
-  validate_bool($restart)
-  validate_bool($userctl)
+  validate_legacy('Boolean', 'validate_bool', $restart)
+  validate_legacy('Boolean', 'validate_bool', $userctl)
 
   include '::network'
 

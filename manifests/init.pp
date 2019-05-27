@@ -143,22 +143,24 @@ define network_if_base (
   $arpcheck            = true,
 ) {
   # Validate our booleans
-  validate_bool($noaliasrouting)
-  validate_bool($userctl)
-  validate_bool($isalias)
-  validate_bool($peerdns)
-  validate_bool($ipv6init)
-  validate_bool($ipv6autoconf)
-  validate_bool($ipv6peerdns)
-  validate_bool($check_link_down)
-  validate_bool($manage_hwaddr)
-  validate_bool($flush)
-  validate_bool($promisc)
-  validate_bool($restart)
-  validate_bool($arpcheck)
+  validate_legacy('Boolean', 'validate_bool', $noaliasrouting)
+  validate_legacy('Boolean', 'validate_bool', $userctl)
+  validate_legacy('Boolean', 'validate_bool', $isalias)
+  validate_legacy('Boolean', 'validate_bool', $peerdns)
+  validate_legacy('Boolean', 'validate_bool', $ipv6init)
+  validate_legacy('Boolean', 'validate_bool', $ipv6autoconf)
+  validate_legacy('Boolean', 'validate_bool', $ipv6peerdns)
+  validate_legacy('Boolean', 'validate_bool', $check_link_down)
+  validate_legacy('Boolean', 'validate_bool', $manage_hwaddr)
+  validate_legacy('Boolean', 'validate_bool', $flush)
+  validate_legacy('Boolean', 'validate_bool', $promisc)
+  validate_legacy('Boolean', 'validate_bool', $restart)
+  validate_legacy('Boolean', 'validate_bool', $arpcheck)
   # Validate our regular expressions
   $states = [ '^up$', '^down$' ]
-  validate_re($ensure, $states, '$ensure must be either "up" or "down".')
+  validate_legacy(
+    'Pattern', 'validate_re', $ensure, $states,
+    '$ensure must be either "up" or "down".')
 
   include '::network'
 

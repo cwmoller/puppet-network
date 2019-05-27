@@ -68,10 +68,10 @@ define network::if::promisc (
   validate_re($ensure, $states, '$ensure must be either "up" or "down".')
 
   # Validate booleans
-  validate_bool($userctl)
-  validate_bool($manage_hwaddr)
-  validate_bool($restart)
-  validate_bool($promisc)
+  validate_legacy('Boolean', 'validate_bool', $userctl)
+  validate_legacy('Boolean', 'validate_bool', $manage_hwaddr)
+  validate_legacy('Boolean', 'validate_bool', $restart)
+  validate_legacy('Boolean', 'validate_bool', $promisc)
 
   # Validate our data
   if ! is_mac_address($macaddy) {
