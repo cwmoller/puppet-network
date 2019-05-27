@@ -69,7 +69,9 @@ define network::if::dynamic (
 ) {
   # Validate our regular expressions
   $states = [ '^up$', '^down$' ]
-  validate_re($ensure, $states, '$ensure must be either "up" or "down".')
+  validate_legacy(
+    'Pattern', 'validate_re', $ensure, $states,
+    '$ensure must be either "up" or "down".')
 
   if ! is_mac_address($macaddress) {
     # Strip off any tailing VLAN (ie eth5.90 -> eth5).
@@ -79,10 +81,10 @@ define network::if::dynamic (
     $macaddy = $macaddress
   }
   # Validate booleans
-  validate_bool($userctl)
-  validate_bool($peerdns)
-  validate_bool($manage_hwaddr)
-  validate_bool($persistent_dhclient)
+  validate_legacy('Boolean', validate_bool, $userctl)
+  validate_legacy('Boolean', validate_bool, $peerdns)
+  validate_legacy('Boolean', validate_bool, $manage_hwaddr)
+  validate_legacy('Boolean', validate_bool, $persistent_dhclient)
 
   if !$peerdns and ($dns1 or $dns2) {
     fail('$peerdns must be true when $dns1 or $dns2 are specified')

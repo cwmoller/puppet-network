@@ -40,7 +40,9 @@ define network::if::bridge (
 ) {
   # Validate our regular expressions
   $states = [ '^up$', '^down$' ]
-  validate_re($ensure, $states, '$ensure must be either "up" or "down".')
+  validate_legacy(
+    'Pattern', 'validate_re', $ensure, $states,
+    '$ensure must be either "up" or "down".')
 
   if $macaddress == undef {
     $macaddy = '' # lint:ignore:empty_string_assignment

@@ -47,11 +47,11 @@ define network::route (
   $restart = true,
 ) {
   # Validate our arrays
-  validate_array($ipaddress)
-  validate_array($netmask)
-  validate_array($gateway)
+  validate_legacy('Stdlib::Compat::Array', 'validate_array', $ipaddress)
+  validate_legacy('Stdlib::Compat::Array', 'validate_array', $netmask)
+  validate_legacy('Stdlib::Compat::Array', 'validate_array', $gateway)
   # Validate our booleans
-  validate_bool($restart)
+  validate_legacy('Stdlib::Compat::Bool', 'validate_bool', $restart)
 
   include '::network'
 

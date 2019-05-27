@@ -54,12 +54,14 @@ define network::alias::range (
   if $netmask and !is_ip_address($netmask) { fail("${netmask} is not an IP address.") }
   if $broadcast and !is_ip_address($broadcast) { fail("${broadcast} is not an IP address.") }
   # Validate our booleans
-  validate_bool($noaliasrouting)
-  validate_bool($restart)
-  validate_bool($arpcheck)
+  validate_legacy('Boolean', 'validate_bool', $noaliasrouting)
+  validate_legacy('Boolean', 'validate_bool', $restart)
+  validate_legacy('Boolean', 'validate_bool', $arpcheck)
   # Validate our regular expressions
   $states = [ '^up$', '^down$', '^absent$' ]
-  validate_re($ensure, $states, '$ensure must be either "up", "down", or "absent".')
+  validate_legacy(
+    'Pattern', 'validate_re',
+    $ensure, $states, '$ensure must be either "up", "down", or "absent".')
 
   include '::network'
 

@@ -43,7 +43,9 @@ define network::bond::bridge (
 ) {
   # Validate our regular expressions
   $states = [ '^up$', '^down$' ]
-  validate_re($ensure, $states, '$ensure must be either "up" or "down".')
+  validate_legacy(
+    'Pattern', 'validate_re',
+    $ensure, $states, '$ensure must be either "up" or "down".')
 
   network_if_base { $title:
     ensure       => $ensure,

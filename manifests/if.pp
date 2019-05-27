@@ -47,7 +47,9 @@ define network::if (
 ) {
   # Validate our regular expressions
   $states = [ '^up$', '^down$' ]
-  validate_re($ensure, $states, '$ensure must be either "up" or "down".')
+  validate_legacy(
+    'Pattern', 'validate_re',
+    $ensure, $states, '$ensure must be either "up" or "down".')
 
   if ! is_mac_address($macaddress) {
     # Strip off any tailing VLAN (ie eth5.90 -> eth5).
@@ -58,10 +60,10 @@ define network::if (
   }
 
   # Validate booleans
-  validate_bool($userctl)
-  validate_bool($manage_hwaddr)
-  validate_bool($flush)
-  validate_bool($restart)
+  validate_legacy('Boolean', 'validate_bool', $userctl)
+  validate_legacy('Boolean', 'validate_bool', $manage_hwaddr)
+  validate_legacy('Boolean', 'validate_bool', $flush)
+  validate_legacy('Boolean', 'validate_bool', $restart)
 
   network_if_base { $title:
     ensure        => $ensure,
