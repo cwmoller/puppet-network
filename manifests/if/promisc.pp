@@ -5,7 +5,7 @@
 # === Parameters:
 #
 #   $ensure        - required - up|down
-#   $macaddress    - optional, defaults to macaddress_$title
+#   $macaddress    - optional - defaults to $::networking['interfaces'][$title]['mac']
 #   $manage_hwaddr - optional - defaults to true
 #   $bootproto     - optional, defaults to undef ('none')
 #   $userctl       - optional
@@ -41,26 +41,26 @@
 # Copyright (C) 2015 Elyse Salberg, unless otherwise noted.
 #
 define network::if::promisc (
-  $ensure,
-  $macaddress    = undef,
-  $manage_hwaddr = true,
-  $bootproto     = undef,
-  $userctl       = false,
-  $mtu           = undef,
-  $ethtool_opts  = undef,
-  $restart       = true,
-  $promisc       = true,
+  Enum['up', 'down'] $ensure,
+  Optional[Stdlib::MAC] $macaddress = undef,
+  Boolean $manage_hwaddr = true,
+  Optional[Network::If::Bootproto] $bootproto = undef,
+  Boolean $userctl = false,
+  Optional[String] $mtu = undef,
+  Optional[String] $ethtool_opts = undef,
+  Boolean $restart = true,
+  Boolean $promisc = true,
 ) {
   include '::network'
 
   $interface = $name
 
-  if ! is_mac_address($macaddress) {
+  if $macaddress {
+    $macaddy = $macaddress
+  } else {
     # Strip off any tailing VLAN (ie eth5.90 -> eth5).
     $title_clean = regsubst($title,'^(\w+)\.\d+$','\1')
-    $macaddy = getvar("::macaddress_${title_clean}")
-  } else {
-    $macaddy = $macaddress
+    $macaddy = $::networking['interfaces'][$title_clean]['mac']
   }
 
   # Validate our regular expressions
@@ -85,9 +85,9 @@ define network::if::promisc (
   }
 
   if $promisc {
-    case $::operatingsystem {
+    case $::os['name'] {
       /^(RedHat|CentOS|OEL|OracleLinux|SLC|Scientific)$/: {
-        case $::operatingsystemmajrelease {
+        case $::os['release']['major'] {
           '5': {
             $ifup_source   = "puppet:///modules/${module_name}/promisc/ifup-local-promisc_5"
             $ifdown_source = "puppet:///modules/${module_name}/promisc/ifdown-local-promisc_5"
@@ -144,14 +144,9 @@ define network::if::promisc (
 
   network_if_base { $title:
     ensure        => $ensure,
-    ipaddress     => '',
-    netmask       => '',
-    gateway       => '',
     macaddress    => $macaddy,
     manage_hwaddr => $manage_hwaddr,
     bootproto     => 'none',
-    ipv6address   => '',
-    ipv6gateway   => '',
     mtu           => $mtu,
     ethtool_opts  => $ethtool_opts,
     promisc       => $promisc,
