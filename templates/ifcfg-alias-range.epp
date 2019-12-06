@@ -5,8 +5,14 @@ IPADDR_START=<%= $ipaddress_start %>
 IPADDR_END=<%= $ipaddress_end %>
 CLONENUM_START=<%= $clonenum_start %>
 NO_ALIASROUTING=<%= bool2str($noaliasrouting, 'yes', 'no') %>
-<% if $netmask { %>NETMASK=<%= $netmask %><% } %>
-<% if $broadcast { %>BROADCAST=<%= $broadcast %><% } %>
-<% if !$arpcheck { %>ARPCHECK=no<% } %>
+<% if $netmask { -%>
+NETMASK=<%= $netmask %>
+<% } -%>
+<% if $broadcast { -%>
+BROADCAST=<%= $broadcast %>
+<% } -%>
+<% if !$arpcheck { -%>
+ARPCHECK=no
+<% } -%>
 ONPARENT=<%= $onparent %>
 NM_CONTROLLED=no
