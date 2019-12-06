@@ -15,12 +15,14 @@
 #   $peerdns         - optional
 #   $dns1            - optional - only used when peerdns is true
 #   $dns2            - optional - only used when peerdns is true
+#   $nm_controlled   - optional - defaults to false
 #   $linkdelay       - optional
 #   $check_link_down - optional
 #   $zone            - optional
 #   $metric          - optional
 #   $defroute        - optional
 #   $restart         - optional - defaults to true
+#   $vlan            - optional - defaults to false
 #
 # === Actions:
 #
@@ -58,6 +60,7 @@ define network::if::dynamic (
   Boolean $persistent_dhclient = false,
   Optional[String] $ethtool_opts = undef,
   Boolean $peerdns = false,
+  Boolean $nm_controlled = false,
   Optional[Stdlib::IP::Address::Nosubnet] $dns1 = undef,
   Optional[Stdlib::IP::Address::Nosubnet] $dns2 = undef,
   Optional[String] $linkdelay = undef,
@@ -66,6 +69,7 @@ define network::if::dynamic (
   Optional[String] $zone = undef,
   Optional[String] $metric = undef,
   Boolean $restart = true,
+  Boolean $vlan = false,
 ) {
 
   if $macaddress {
@@ -91,6 +95,7 @@ define network::if::dynamic (
     persistent_dhclient => $persistent_dhclient,
     ethtool_opts        => $ethtool_opts,
     peerdns             => $peerdns,
+    nm_controlled       => $nm_controlled,
     dns1                => $dns1,
     dns2                => $dns2,
     linkdelay           => $linkdelay,
@@ -99,5 +104,6 @@ define network::if::dynamic (
     zone                => $zone,
     metric              => $metric,
     restart             => $restart,
+    vlan                => $vlan,
   }
 } # define network::if::dynamic

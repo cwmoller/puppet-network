@@ -14,7 +14,7 @@
 #   $metric       - optional
 #   $defroute     - optional
 #   $restart      - optional - defaults to true
-
+#   $type         - optional - defaults to 'Ethernet'
 #
 # === Actions:
 #
@@ -44,6 +44,7 @@ define network::bond::dynamic (
   Optional[String] $defroute = undef,
   Optional[String] $metric = undef,
   Boolean $restart = true,
+  Optional[String] $type = 'Ethernet'
 ) {
 
   network_if_base { $title:
@@ -56,6 +57,7 @@ define network::bond::dynamic (
     defroute     => $defroute,
     metric       => $metric,
     restart      => $restart,
+    type         => $type,
   }
 
   # Only install "alias bondN bonding" on old OSs that support

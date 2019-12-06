@@ -67,8 +67,8 @@ describe 'network::route', :type => 'define' do
         'GATEWAY0=192.168.1.2',
       ])
     end
-    it { should contain_service('network') }
-    it { is_expected.to_not contain_file('route-eth1').that_notifies('Service[network]') }
+    it { should contain_service('NetworkManager') }
+    it { is_expected.to_not contain_file('route-eth1').that_notifies('Service[NetworkManager]') }
   end
 
   context 'array parameters' do
@@ -103,7 +103,7 @@ describe 'network::route', :type => 'define' do
         'GATEWAY1=10.0.0.1',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 
 end

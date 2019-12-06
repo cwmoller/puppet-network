@@ -31,7 +31,7 @@ class network {
     }
   }
 
-  service { 'network':
+  service { 'NetworkManager':
     ensure     => 'running',
     enable     => true,
     hasrestart => true,
@@ -66,6 +66,7 @@ class network {
 #   $bonding_opts        - optional
 #   $isalias             - optional
 #   $peerdns             - optional
+#   $nm_controlled       - optional - defaults to false
 #   $dns1                - optional
 #   $dns2                - optional
 #   $domain              - optional
@@ -77,6 +78,8 @@ class network {
 #   $zone                - optional
 #   $metric              - optional
 #   $defroute            - optional
+#   $type                - optional - defaults to 'Ethernet'
+#   $vlan                - optional - defaults to false
 #   $promisc             - optional - defaults to false
 #   $restart             - optional - defaults to true
 #   $arpcheck            - optional - defaults to true
@@ -126,6 +129,7 @@ define network_if_base (
   Optional[String] $bonding_opts = undef,
   Boolean $isalias = false,
   Boolean $peerdns = false,
+  Boolean $nm_controlled = false,
   Boolean $ipv6peerdns = false,
   Optional[Stdlib::IP::Address::Nosubnet] $dns1 = undef,
   Optional[Stdlib::IP::Address::Nosubnet] $dns2 = undef,
@@ -138,6 +142,8 @@ define network_if_base (
   Optional[String] $defroute = undef,
   Optional[String] $zone = undef,
   Optional[String] $metric = undef,
+  Boolean $vlan = false,
+  Optional[String] $type = 'Ethernet',
   Boolean $promisc = false,
   Boolean $restart = true,
   Boolean $arpcheck = true,
@@ -231,7 +237,7 @@ define network_if_base (
       command     => "ip addr flush dev ${interface}",
       refreshonly => true,
       subscribe   => File["ifcfg-${interface}"],
-      before      => Service['network'],
+      before      => Service['NetworkManager'],
       path        => '/sbin:/usr/sbin',
     }
   }
@@ -247,7 +253,7 @@ define network_if_base (
 
   if $restart {
     File["ifcfg-${interface}"] {
-      notify  => Service['network'],
+      notify  => Service['NetworkManager'],
     }
   }
 } # define network_if_base

@@ -14,6 +14,7 @@
 #   $zone           - optional
 #   $metric         - optional
 #   $restart        - optional - defaults to true
+#   $type           - optional - defaults to 'Ethernet'
 #
 # === Actions:
 #
@@ -48,12 +49,8 @@ define network::alias (
   Optional[String] $zone = undef,
   Optional[String] $metric = undef,
   Boolean $restart = true,
+  Optional[String] $type = 'Ethernet',
 ) {
-  # Validate our data
-  if ! is_ip_address($ipaddress) { fail("${ipaddress} is not an IP address.") }
-  # Validate our booleans
-  validate_legacy('Boolean', 'validate_bool', $noaliasrouting)
-  validate_legacy('Boolean', 'validate_bool', $userctl)
 
   network_if_base { $title:
     ensure         => $ensure,
@@ -69,5 +66,6 @@ define network::alias (
     zone           => $zone,
     metric         => $metric,
     restart        => $restart,
+    type           => $type,
   }
 } # define network::alias

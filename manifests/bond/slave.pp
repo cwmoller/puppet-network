@@ -21,7 +21,7 @@
 #
 # === Requires:
 #
-#   Service['network']
+#   Service['NetworkManager']
 #
 # === Sample Usage:
 #
@@ -78,7 +78,7 @@ define network::bond::slave (
 
   if $restart {
     File["ifcfg-${interface}"] {
-      notify  => Service['network'],
+      notify  => Service['NetworkManager'],
     }
   }
 } # define network::bond::slave

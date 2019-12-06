@@ -92,7 +92,7 @@ describe 'network::bridge::static', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-br1',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-br1] with required contents' do
       verify_contents(catalogue, 'ifcfg-br1', [
@@ -106,8 +106,8 @@ describe 'network::bridge::static', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
-    it { is_expected.to contain_file('ifcfg-br1').that_notifies('Service[network]') }
+    it { should contain_service('NetworkManager') }
+    it { is_expected.to contain_file('ifcfg-br1').that_notifies('Service[NetworkManager]') }
     it { should contain_package('bridge-utils') }
   end
 
@@ -145,8 +145,8 @@ describe 'network::bridge::static', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
-    it { is_expected.to_not contain_file('ifcfg-br1').that_notifies('Service[network]') }
+    it { should contain_service('NetworkManager') }
+    it { is_expected.to_not contain_file('ifcfg-br1').that_notifies('Service[NetworkManager]') }
     it { should contain_package('bridge-utils') }
   end
 
@@ -163,6 +163,7 @@ describe 'network::bridge::static', :type => 'define' do
       :ipv6peerdns   => true,
       :userctl       => true,
       :peerdns       => true,
+      :nm_controlled => true,
       :dns1          => '3.4.5.6',
       :dns2          => '5.6.7.8',
       :domain        => 'somedomain.com',
@@ -184,7 +185,7 @@ describe 'network::bridge::static', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-br1',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-br1] with required contents' do
       verify_contents(catalogue, 'ifcfg-br1', [
@@ -210,7 +211,7 @@ describe 'network::bridge::static', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
     it { should contain_package('bridge-utils') }
   end
 

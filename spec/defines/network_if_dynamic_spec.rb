@@ -40,7 +40,7 @@ describe 'network::if::dynamic', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-eth99',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-eth99] with required contents' do
       verify_contents(catalogue, 'ifcfg-eth99', [
@@ -53,7 +53,7 @@ describe 'network::if::dynamic', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 
   context 'optional parameters' do
@@ -67,6 +67,7 @@ describe 'network::if::dynamic', :type => 'define' do
       :dhcp_hostname   => 'hostname',
       :ethtool_opts    => 'speed 100 duplex full autoneg off',
       :peerdns         => true,
+      :nm_controlled   => true,
       :linkdelay       => '5',
       :check_link_down => true,
       :defroute        => 'yes',
@@ -93,7 +94,7 @@ describe 'network::if::dynamic', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-eth99',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-eth99] with required contents' do
       verify_contents(catalogue, 'ifcfg-eth99', [
@@ -114,7 +115,7 @@ describe 'network::if::dynamic', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 
   context 'optional parameters - vlan' do
@@ -139,7 +140,7 @@ describe 'network::if::dynamic', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-eth45.302',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-eth45.302] with required contents' do
       verify_contents(catalogue, 'ifcfg-eth45.302', [
@@ -152,7 +153,7 @@ describe 'network::if::dynamic', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 
   context 'optional parameters - manage_hwaddr' do
@@ -181,7 +182,7 @@ describe 'network::if::dynamic', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-eth0',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-eth0] with required contents' do
       verify_contents(catalogue, 'ifcfg-eth0', [
@@ -193,7 +194,7 @@ describe 'network::if::dynamic', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 
   context 'optional parameters - persistent_dhclient' do

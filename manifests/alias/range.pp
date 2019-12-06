@@ -85,7 +85,7 @@ define network::alias::range (
 
   if $restart {
     File["ifcfg-${interface}-range${clonenum_start}"] {
-      notify  => Service['network'],
+      notify  => Service['NetworkManager'],
     }
   }
 

@@ -18,6 +18,7 @@
 #   $mtu            - optional
 #   $ethtool_opts   - optional
 #   $peerdns        - optional
+#   $nm_controlled  - optional - defaults to false
 #   $ipv6peerdns    - optional - defaults to false
 #   $dns1           - optional
 #   $dns2           - optional
@@ -29,6 +30,8 @@
 #   $defroute       - optional
 #   $restart        - optional - defaults to true
 #   $arpcheck       - optional - defaults to true
+#   $vlan           - optional - defaults to false
+#   $type           - optional - defaults to 'Ethernet'
 #
 # === Actions:
 #
@@ -75,6 +78,7 @@ define network::if::static (
   Optional[String] $mtu = undef,
   Optional[String] $ethtool_opts = undef,
   Boolean $peerdns = false,
+  Boolean $nm_controlled = false,
   Boolean $ipv6peerdns = false,
   Optional[Stdlib::IP::Address::Nosubnet] $dns1 = undef,
   Optional[Stdlib::IP::Address::Nosubnet] $dns2 = undef,
@@ -87,6 +91,8 @@ define network::if::static (
   Optional[String] $metric = undef,
   Boolean $restart = true,
   Boolean $arpcheck = true,
+  Boolean $vlan = false,
+  Optional[String] $type = 'Ethernet',
 ) {
   # Handle multiple IPv6 addresses
   if is_array($ipv6address) {
@@ -109,15 +115,6 @@ define network::if::static (
     $title_clean = regsubst($title,'^(\w+)\.\d+$','\1')
     $macaddy = $::networking['interfaces'][$title_clean]['mac']
   }
-  # Validate booleans
-  validate_legacy('Boolean', 'validate_bool', $userctl)
-  validate_legacy('Boolean', 'validate_bool', $ipv6init)
-  validate_legacy('Boolean', 'validate_bool', $ipv6autoconf)
-  validate_legacy('Boolean', 'validate_bool', $peerdns)
-  validate_legacy('Boolean', 'validate_bool', $ipv6peerdns)
-  validate_legacy('Boolean', 'validate_bool', $manage_hwaddr)
-  validate_legacy('Boolean', 'validate_bool', $flush)
-  validate_legacy('Boolean', 'validate_bool', $arpcheck)
 
   network_if_base { $title:
     ensure          => $ensure,
@@ -136,6 +133,7 @@ define network::if::static (
     mtu             => $mtu,
     ethtool_opts    => $ethtool_opts,
     peerdns         => $peerdns,
+    nm_controlled   => $nm_controlled,
     ipv6peerdns     => $ipv6peerdns,
     dns1            => $dns1,
     dns2            => $dns2,
@@ -148,5 +146,7 @@ define network::if::static (
     metric          => $metric,
     restart         => $restart,
     arpcheck        => $arpcheck,
+    vlan            => $vlan,
+    type            => $type,
   }
 } # define network::if::static

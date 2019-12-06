@@ -10,6 +10,7 @@
 #   $ethtool_opts - optional
 #   $macaddress   - optional
 #   $restart      - optional - defaults to true
+#   $vlan         - optional - defaults to false
 #
 # === Actions:
 #
@@ -37,12 +38,8 @@ define network::if::bridge (
   Optional[String] $ethtool_opts = undef,
   Optional[Stdlib::MAC] $macaddress = undef,
   Boolean $restart = true,
+  Boolean $vlan = false,
 ) {
-  # Validate our regular expressions
-  $states = [ '^up$', '^down$' ]
-  validate_legacy(
-    'Pattern', 'validate_re', $ensure, $states,
-    '$ensure must be either "up" or "down".')
 
   if $macaddress == undef {
     $macaddy = '' # lint:ignore:empty_string_assignment
@@ -59,5 +56,6 @@ define network::if::bridge (
     ethtool_opts => $ethtool_opts,
     bridge       => $bridge,
     restart      => $restart,
+    vlan         => $vlan,
   }
 } # define network::if::bridge

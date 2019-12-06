@@ -16,7 +16,7 @@
 # === Requires:
 #
 #   File["ifcfg-$name"]
-#   Service['network']
+#   Service['NetworkManager']
 #
 # === Sample Usage:
 #
@@ -67,7 +67,7 @@ define network::route (
 
   if $restart {
     File["route-${interface}"] {
-      notify  => Service['network'],
+      notify  => Service['NetworkManager'],
     }
   }
 } # define network::route

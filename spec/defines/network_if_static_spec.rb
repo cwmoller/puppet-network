@@ -90,7 +90,7 @@ describe 'network::if::static', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-eth1',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-eth1] with required contents' do
       verify_contents(catalogue, 'ifcfg-eth1', [
@@ -153,36 +153,37 @@ describe 'network::if::static', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
-    it { is_expected.to_not contain_file('ifcfg-eth1').that_notifies('Service[network]') }
+    it { should contain_service('NetworkManager') }
+    it { is_expected.to_not contain_file('ifcfg-eth1').that_notifies('Service[NetworkManager]') }
   end
 
   context 'optional parameters' do
     let(:title) { 'eth1' }
     let :params do {
-      :ensure       => 'down',
-      :ipaddress    => '1.2.3.4',
-      :netmask      => '255.255.255.0',
-      :gateway      => '1.2.3.1',
-      :macaddress   => 'ef:ef:ef:ef:ef:ef',
-      :userctl      => true,
-      :mtu          => '9000',
-      :ethtool_opts => 'speed 1000 duplex full autoneg off',
-      :peerdns      => true,
-      :dns1         => '3.4.5.6',
-      :dns2         => '5.6.7.8',
-      :domain       => 'somedomain.com',
-      :ipv6init     => true,
-      :ipv6autoconf => true,
-      :ipv6peerdns  => true,
-      :ipv6address  => '123:4567:89ab:cdef:123:4567:89ab:cdef/64',
-      :ipv6gateway  => '123:4567:89ab:cdef:123:4567:89ab:1',
-      :linkdelay    => '5',
-      :scope        => 'peer 1.2.3.1',
-      :defroute     => 'yes',
-      :metric       => '10',
-      :zone         => 'trusted',
-      :arpcheck     => false,
+      :ensure        => 'down',
+      :ipaddress     => '1.2.3.4',
+      :netmask       => '255.255.255.0',
+      :gateway       => '1.2.3.1',
+      :macaddress    => 'ef:ef:ef:ef:ef:ef',
+      :userctl       => true,
+      :mtu           => '9000',
+      :ethtool_opts  => 'speed 1000 duplex full autoneg off',
+      :peerdns       => true,
+      :nm_controlled => true,
+      :dns1          => '3.4.5.6',
+      :dns2          => '5.6.7.8',
+      :domain        => 'somedomain.com',
+      :ipv6init      => true,
+      :ipv6autoconf  => true,
+      :ipv6peerdns   => true,
+      :ipv6address   => '123:4567:89ab:cdef:123:4567:89ab:cdef/64',
+      :ipv6gateway   => '123:4567:89ab:cdef:123:4567:89ab:1',
+      :linkdelay     => '5',
+      :scope         => 'peer 1.2.3.1',
+      :defroute      => 'yes',
+      :metric        => '10',
+      :zone          => 'trusted',
+      :arpcheck      => false,
     }
     end
     let :facts do {
@@ -204,7 +205,7 @@ describe 'network::if::static', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-eth1',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-eth1] with required contents' do
       verify_contents(catalogue, 'ifcfg-eth1', [
@@ -238,7 +239,7 @@ describe 'network::if::static', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 
   context 'optional parameters - vlan' do
@@ -268,7 +269,7 @@ describe 'network::if::static', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-eth6.203',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-eth6.203] with required contents' do
       verify_contents(catalogue, 'ifcfg-eth6.203', [
@@ -283,7 +284,7 @@ describe 'network::if::static', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 
   context 'optional parameters - manage_hwaddr' do
@@ -314,7 +315,7 @@ describe 'network::if::static', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-eth0',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-eth0] with required contents' do
       verify_contents(catalogue, 'ifcfg-eth0', [
@@ -328,7 +329,7 @@ describe 'network::if::static', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 
   context 'flush => true - ip addr flush' do
@@ -353,7 +354,7 @@ describe 'network::if::static', :type => 'define' do
       }
     }
     end
-    it { should contain_exec('network-flush').with_command('ip addr flush dev eth1').that_comes_before('Service[network]') }
+    it { should contain_exec('network-flush').with_command('ip addr flush dev eth1').that_comes_before('Service[NetworkManager]') }
   end
 
   context 'optional parameters - single ipv6address in array' do

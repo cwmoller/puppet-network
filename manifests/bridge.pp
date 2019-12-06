@@ -124,7 +124,7 @@ define network::bridge (
 
   if $restart {
     File["ifcfg-${interface}"] {
-      notify  => Service['network'],
+      notify  => Service['NetworkManager'],
     }
   }
 } # define network::bridge

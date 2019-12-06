@@ -12,6 +12,7 @@
 #   $ipv6gateway   - optional
 #   $userctl       - optional - defaults to false
 #   $peerdns       - optional - defaults to false
+#   $nm_controlled - optional - defaults to false
 #   $ipv6init      - optional - defaults to false
 #   $ipv6peerdns   - optional - defaults to false
 #   $dns1          - optional
@@ -59,6 +60,7 @@ define network::bridge::static (
   Network::If::Bootproto $bootproto = 'static',
   Boolean $userctl = false,
   Boolean $peerdns = false,
+  Boolean $nm_controlled = false,
   Boolean $ipv6init = false,
   Boolean $ipv6peerdns = false,
   Optional[Stdlib::IP::Address::Nosubnet] $dns1 = undef,
