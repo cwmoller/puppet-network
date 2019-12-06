@@ -188,6 +188,8 @@ define network_if_base (
       userctl        => $userctl,
       zone           => $zone,
       metric         => $metric,
+      type           => $type,
+      nm_controlled  => $nm_controlled,
     })
   } else {
     $onboot = $ensure ? {
@@ -228,6 +230,8 @@ define network_if_base (
       metric          => $metric,
       promisc         => $promisc,
       arpcheck        => $arpcheck,
+      type            => $type,
+      nm_controlled   => $nm_controlled,
     })
   }
 
