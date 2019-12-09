@@ -4,10 +4,9 @@
   "author": "razorsedge",
   "summary": "Manage RedHat traditional network configuration via static and dhcp configuration of normal and bonded interfaces as well as bridges and VLANs.",
   "license": "Apache-2.0",
+  "source": "https://github.com/razorsedge/puppet-network.git",
   "project_page": "https://github.com/razorsedge/puppet-network",
   "issues_url": "https://github.com/razorsedge/puppet-network/issues",
-  "source": "https://github.com/razorsedge/puppet-network.git",
-  "tags": [ "network", "networking" ],
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
@@ -17,19 +16,41 @@
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
-      "operatingsystemrelease": [ "5", "6", "7" ]
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ]
     },
     {
       "operatingsystem": "CentOS",
-      "operatingsystemrelease": [ "5", "6", "7" ]
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ]
     },
     {
       "operatingsystem": "OracleLinux",
-      "operatingsystemrelease": [ "5", "6", "7" ]
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ]
     },
     {
       "operatingsystem": "Fedora",
-      "operatingsystemrelease": [ "16", "17", "18", "19", "20", "21" ]
+      "operatingsystemrelease": [
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21"
+      ]
     }
   ],
   "requirements": [
@@ -37,5 +58,12 @@
       "name": "puppet",
       "version_requirement": ">=4 <7.0.0"
     }
-  ]
+  ],
+  "tags": [
+    "network",
+    "networking"
+  ],
+  "pdk-version": "1.14.1",
+  "template-url": "pdk-default#1.14.1",
+  "template-ref": "1.14.1-0-g0b5b39b"
 }
