@@ -44,7 +44,7 @@ describe 'network::bond', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-bond0',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-bond0] with required contents' do
       verify_contents(catalogue, 'ifcfg-bond0', [
@@ -57,7 +57,7 @@ describe 'network::bond', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
     it { should_not contain_augeas('modprobe.conf_bond0') }
 
     context 'on an older operatingsystem with /etc/modprobe.conf' do
@@ -137,7 +137,7 @@ describe 'network::bond', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-bond0',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-bond0] with required contents' do
       verify_contents(catalogue, 'ifcfg-bond0', [
@@ -153,7 +153,7 @@ describe 'network::bond', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
     it { should_not contain_augeas('modprobe.conf_bond0') }
   end
 

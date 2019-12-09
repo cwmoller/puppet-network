@@ -4,16 +4,17 @@
 #
 # === Parameters:
 #
-#   $master       - required
-#   $macaddress   - optional
-#   $ethtool_opts - optional
-#   $restart      - optional, defaults to true
-#   $zone         - optional
-#   $defroute     - optional
-#   $metric       - optional
-#   $userctl      - optional - defaults to false
-#   $bootproto    - optional
-#   $onboot       - optional
+#   $master        - required
+#   $macaddress    - optional
+#   $ethtool_opts  - optional
+#   $restart       - optional, defaults to true
+#   $zone          - optional
+#   $defroute      - optional
+#   $metric        - optional
+#   $userctl       - optional - defaults to false
+#   $bootproto     - optional
+#   $onboot        - optional
+#   $nm_controlled - optional - defaults to false
 #
 # === Actions:
 #
@@ -47,6 +48,7 @@ define network::bond::slave (
   Optional[String] $metric = undef,
   Boolean $restart = true,
   Boolean $userctl = false,
+  Boolean $nm_controlled = false,
   Optional[Network::If::Bootproto] $bootproto = undef,
   Optional[String] $onboot = undef,
 ) {
@@ -62,16 +64,17 @@ define network::bond::slave (
     group   => 'root',
     path    => "/etc/sysconfig/network-scripts/ifcfg-${interface}",
     content => epp("${module_name}/ifcfg-bond.epp", {
-      interface    => $interface,
-      macaddress   => $macaddress,
-      master       => $master,
-      ethtool_opts => $ethtool_opts,
-      defroute     => $defroute,
-      zone         => $zone,
-      metric       => $metric,
-      bootproto    => $bootproto,
-      onboot       => $onboot,
-      userctl      => $userctl,
+      interface     => $interface,
+      macaddress    => $macaddress,
+      master        => $master,
+      ethtool_opts  => $ethtool_opts,
+      defroute      => $defroute,
+      zone          => $zone,
+      metric        => $metric,
+      bootproto     => $bootproto,
+      onboot        => $onboot,
+      userctl       => $userctl,
+      nm_controlled => $nm_controlled,
     }),
     before  => File["ifcfg-${master}"],
   }

@@ -57,8 +57,8 @@ describe 'network::bond::slave', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
-    it { is_expected.to contain_file('ifcfg-eth1').that_notifies('Service[network]') }
+    it { should contain_service('NetworkManager') }
+    it { is_expected.to contain_file('ifcfg-eth1').that_notifies('Service[NetworkManager]') }
   end
 
   context 'required parameters, restart => false' do

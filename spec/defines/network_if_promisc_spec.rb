@@ -33,7 +33,7 @@ describe 'network::if::promisc', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-eth1',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-eth1] with required contents' do
       verify_contents(catalogue, 'ifcfg-eth1', [
@@ -48,7 +48,7 @@ describe 'network::if::promisc', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
     it { should contain_file('/sbin/ifup-local') }
     it { should contain_file('/sbin/ifdown-local') }
     it { should contain_file('ifup-local-promisc').with(
@@ -99,7 +99,7 @@ describe 'network::if::promisc', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-eth3',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-eth3] with required contents' do
       verify_contents(catalogue, 'ifcfg-eth3', [
@@ -113,7 +113,7 @@ describe 'network::if::promisc', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 
 end
