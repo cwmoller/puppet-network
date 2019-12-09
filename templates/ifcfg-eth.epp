@@ -1,6 +1,7 @@
 ###
 ### File managed by Puppet
 ###
+NAME="<%= $identifier %>"
 DEVICE=<%= $interface %>
 BOOTPROTO=<%= $bootproto %>
 <% if $manage_hwaddr and $macaddress { -%>

@@ -108,6 +108,7 @@ class network {
 # Copyright (C) 2011 Mike Arnold, unless otherwise noted.
 #
 define network_if_base (
+  Optional[String] $identifier = "Puppet $name",
   Enum['up', 'down'] $ensure,
   Optional[Stdlib::MAC] $macaddress = undef,
   Optional[Stdlib::IP::Address::V4::Nosubnet] $ipaddress = undef,
@@ -198,6 +199,7 @@ define network_if_base (
       default => undef,
     }
     $iftemplate = epp("${module_name}/ifcfg-eth.epp", {
+      identifier      => $identifier,
       interface       => $interface,
       bootproto       => $bootproto,
       manage_hwaddr   => $manage_hwaddr,
