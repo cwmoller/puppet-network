@@ -72,7 +72,7 @@ check_link_down() {
  return 1;
 }
 <% } -%>
-<% if $nm_controlled and $defroute { -%>
+<% if $defroute { -%>
 DEFROUTE=<%= $defroute %>
 <% } -%>
 <% if $zone { -%>
