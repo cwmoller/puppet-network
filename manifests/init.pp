@@ -140,7 +140,7 @@ define network_if_base (
   Optional[String] $scope = undef,
   Boolean $check_link_down = false,
   Boolean $flush = false,
-  Optional[String] $defroute = undef,
+  Optional[Enum['yes', 'no']] $defroute = undef,
   Optional[String] $zone = undef,
   Optional[String] $metric = undef,
   Boolean $vlan = false,

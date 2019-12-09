@@ -43,7 +43,7 @@ define network::bond::slave (
   Optional[Stdlib::MAC] $macaddress = undef,
   Optional[String] $ethtool_opts = undef,
   Optional[String] $zone = undef,
-  Optional[String] $defroute = undef,
+  Optional[Enum['yes', 'no']] $defroute = undef,
   Optional[String] $metric = undef,
   Boolean $restart = true,
   Boolean $userctl = false,

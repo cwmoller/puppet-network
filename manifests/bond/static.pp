@@ -58,7 +58,7 @@ define network::bond::static (
   Optional[Stdlib::IP::Address::Nosubnet] $dns2 = undef,
   Optional[String] $domain = undef,
   Optional[String] $zone = undef,
-  Optional[String] $defroute = undef,
+  Optional[Enum['yes', 'no']] $defroute = undef,
   Optional[String] $metric = undef,
   Boolean $restart = true,
   Boolean $userctl = false,

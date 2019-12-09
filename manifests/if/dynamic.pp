@@ -65,7 +65,7 @@ define network::if::dynamic (
   Optional[Stdlib::IP::Address::Nosubnet] $dns2 = undef,
   Optional[String] $linkdelay = undef,
   Boolean $check_link_down = false,
-  Optional[String] $defroute = undef,
+  Optional[Enum['yes', 'no']] $defroute = undef,
   Optional[String] $zone = undef,
   Optional[String] $metric = undef,
   Boolean $restart = true,

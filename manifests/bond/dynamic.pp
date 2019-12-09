@@ -41,7 +41,7 @@ define network::bond::dynamic (
   Optional[String] $ethtool_opts = undef,
   String $bonding_opts = 'miimon=100',
   Optional[String] $zone = undef,
-  Optional[String] $defroute = undef,
+  Optional[Enum['yes', 'no']] $defroute = undef,
   Optional[String] $metric = undef,
   Boolean $restart = true,
   Optional[String] $type = 'Ethernet'
