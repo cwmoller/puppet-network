@@ -112,7 +112,7 @@ describe 'network::if::dynamic', :type => 'define' do
         'DEFROUTE=yes',
         'ZONE=trusted',
         'METRIC=10',
-        'NM_CONTROLLED=no',
+        'NM_CONTROLLED=yes',
       ])
     end
     it { should contain_service('NetworkManager') }
@@ -207,7 +207,9 @@ describe 'network::if::dynamic', :type => 'define' do
     }
     end
     let :facts do {
-      :osfamily => 'RedHat'
+      :os => {
+        :family => 'RedHat'
+      }
     }
     end
     it { should contain_file('ifcfg-eth0').with(
@@ -216,7 +218,7 @@ describe 'network::if::dynamic', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-eth0',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-eth0] with required contents' do
       verify_contents(catalogue, 'ifcfg-eth0', [
@@ -225,7 +227,7 @@ describe 'network::if::dynamic', :type => 'define' do
         'PERSISTENT_DHCLIENT=1'
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 
   context 'optional parameters - static dns' do
@@ -239,7 +241,9 @@ describe 'network::if::dynamic', :type => 'define' do
     }
     end
     let :facts do {
-      :osfamily => 'RedHat'
+      :os => {
+        :family => 'RedHat'
+      }
     }
     end
     it { should contain_file('ifcfg-eth0').with(
@@ -248,7 +252,7 @@ describe 'network::if::dynamic', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-eth0',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-eth0] with required contents' do
       verify_contents(catalogue, 'ifcfg-eth0', [
@@ -259,7 +263,7 @@ describe 'network::if::dynamic', :type => 'define' do
         'HWADDR=bb:cc:bb:cc:bb:cc'
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 
 end

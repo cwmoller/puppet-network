@@ -106,8 +106,8 @@ describe 'network::if::static', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
-    it { is_expected.to contain_file('ifcfg-eth1').that_notifies('Service[network]') }
+    it { should contain_service('NetworkManager') }
+    it { is_expected.to contain_file('ifcfg-eth1').that_notifies('Service[NetworkManager]') }
   end
 
   context 'no restart' do
@@ -235,8 +235,8 @@ describe 'network::if::static', :type => 'define' do
         'DEFROUTE=yes',
         'ZONE=trusted',
         'METRIC=10',
-	'ARPCHECK=no',
-        'NM_CONTROLLED=no',
+        'ARPCHECK=no',
+        'NM_CONTROLLED=yes',
       ])
     end
     it { should contain_service('NetworkManager') }
@@ -388,7 +388,7 @@ describe 'network::if::static', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-eth1',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-eth1] with required contents' do
       verify_contents(catalogue, 'ifcfg-eth1', [
@@ -406,7 +406,7 @@ describe 'network::if::static', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 
   context 'optional parameters - multiple ipv6addresses' do
@@ -442,7 +442,7 @@ describe 'network::if::static', :type => 'define' do
       :owner  => 'root',
       :group  => 'root',
       :path   => '/etc/sysconfig/network-scripts/ifcfg-eth1',
-      :notify => 'Service[network]'
+      :notify => 'Service[NetworkManager]'
     )}
     it 'should contain File[ifcfg-eth1] with required contents' do
       verify_contents(catalogue, 'ifcfg-eth1', [
@@ -461,6 +461,6 @@ describe 'network::if::static', :type => 'define' do
         'NM_CONTROLLED=no',
       ])
     end
-    it { should contain_service('network') }
+    it { should contain_service('NetworkManager') }
   end
 end

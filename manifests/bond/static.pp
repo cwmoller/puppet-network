@@ -5,18 +5,19 @@
 #
 # === Parameters:
 #
-#   $ensure       - required - up|down
-#   $ipaddress    - optional
-#   $netmask      - optional
-#   $gateway      - optional
-#   $mtu          - optional
-#   $ethtool_opts - optional
-#   $bonding_opts - optional
-#   $zone         - optional
-#   $defroute     - optional
-#   $restart      - optional - defaults to true
-#   $metric       - optional
-#   $userctl      - optional
+#   $ensure        - required - up|down
+#   $ipaddress     - optional
+#   $netmask       - optional
+#   $gateway       - optional
+#   $mtu           - optional
+#   $ethtool_opts  - optional
+#   $bonding_opts  - optional
+#   $zone          - optional
+#   $defroute      - optional
+#   $restart       - optional - defaults to true
+#   $metric        - optional
+#   $userctl       - optional
+#   $nm_controlled - optional - defaults to false
 #
 # === Actions:
 #

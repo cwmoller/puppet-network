@@ -24,7 +24,7 @@
 #
 class network {
   # Only run on RedHat derived systems.
-  case $::os['family'] {
+  case $facts['os']['family'] {
     'RedHat': { }
     default: {
       fail('This network module only supports RedHat-based systems.')
@@ -154,9 +154,6 @@ define network_if_base (
 
   $interface = $name
 
-  # Normalize $persistent_dhclient value
-  $persistent_dhclient_real = bool2num($persistent_dhclient)
-
   # Deal with the case where $dns2 is non-empty and $dns1 is empty.
   if $dns2 {
     if !$dns1 {
@@ -199,42 +196,43 @@ define network_if_base (
       default => undef,
     }
     $iftemplate = epp("${module_name}/ifcfg-eth.epp", {
-      identifier      => $identifier,
-      interface       => $interface,
-      bootproto       => $bootproto,
-      manage_hwaddr   => $manage_hwaddr,
-      macaddress      => $macaddress,
-      onboot          => $onboot,
-      ipaddress       => $ipaddress,
-      netmask         => $netmask,
-      gateway         => $gateway,
-      mtu             => $mtu,
-      bonding_opts    => $bonding_opts,
-      dhcp_hostname   => $dhcp_hostname,
-      ethtool_opts    => $ethtool_opts,
-      peerdns         => $peerdns,
-      dns1            => $dns1_real,
-      dns2            => $dns2_real,
-      domain          => $domain,
-      userctl         => $userctl,
-      ipv6init        => $ipv6init,
-      ipv6autoconf    => $ipv6autoconf,
-      ipv6address     => $ipv6address,
-      ipv6gateway     => $ipv6gateway,
-      ipv6peerdns     => $ipv6peerdns,
-      ipv6secondaries => $ipv6secondaries,
-      bridge          => $bridge,
-      linkdelay       => $linkdelay,
-      scope           => $scope,
-      check_link_down => $check_link_down,
-      defroute        => $defroute,
-      zone            => $zone,
-      metric          => $metric,
-      promisc         => $promisc,
-      arpcheck        => $arpcheck,
-      type            => $type,
-      nm_controlled   => $nm_controlled,
-      uuid            => fqdn_uuid($interface)
+      identifier          => $identifier,
+      interface           => $interface,
+      bootproto           => $bootproto,
+      manage_hwaddr       => $manage_hwaddr,
+      macaddress          => $macaddress,
+      onboot              => $onboot,
+      ipaddress           => $ipaddress,
+      netmask             => $netmask,
+      gateway             => $gateway,
+      mtu                 => $mtu,
+      bonding_opts        => $bonding_opts,
+      dhcp_hostname       => $dhcp_hostname,
+      persistent_dhclient => bool2num($persistent_dhclient),
+      ethtool_opts        => $ethtool_opts,
+      peerdns             => $peerdns,
+      dns1                => $dns1_real,
+      dns2                => $dns2_real,
+      domain              => $domain,
+      userctl             => $userctl,
+      ipv6init            => $ipv6init,
+      ipv6autoconf        => $ipv6autoconf,
+      ipv6address         => $ipv6address,
+      ipv6gateway         => $ipv6gateway,
+      ipv6peerdns         => $ipv6peerdns,
+      ipv6secondaries     => $ipv6secondaries,
+      bridge              => $bridge,
+      linkdelay           => $linkdelay,
+      scope               => $scope,
+      check_link_down     => $check_link_down,
+      defroute            => $defroute,
+      zone                => $zone,
+      metric              => $metric,
+      promisc             => $promisc,
+      arpcheck            => $arpcheck,
+      type                => $type,
+      nm_controlled       => $nm_controlled,
+      uuid                => fqdn_uuid($interface)
     })
   }
 

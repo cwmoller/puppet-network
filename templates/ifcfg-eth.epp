@@ -4,6 +4,9 @@
 NAME="<%= $identifier %>"
 DEVICE=<%= $interface %>
 BOOTPROTO=<%= $bootproto %>
+<% if $bootproto == 'dhcp' { -%>
+PERSISTENT_DHCLIENT=<%= $persistent_dhclient %>
+<% } -%>
 <% if $manage_hwaddr and $macaddress { -%>
 HWADDR=<%= $macaddress %>
 <% } -%>

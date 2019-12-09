@@ -6,15 +6,16 @@
 #
 # === Parameters:
 #
-#   $ensure       - required - up|down
-#   $mtu          - optional
-#   $ethtool_opts - optional
-#   $bonding_opts - optional
-#   $zone         - optional
-#   $metric       - optional
-#   $defroute     - optional
-#   $restart      - optional - defaults to true
-#   $type         - optional - defaults to 'Ethernet'
+#   $ensure        - required - up|down
+#   $mtu           - optional
+#   $ethtool_opts  - optional
+#   $bonding_opts  - optional
+#   $zone          - optional
+#   $metric        - optional
+#   $defroute      - optional
+#   $restart       - optional - defaults to true
+#   $type          - optional - defaults to 'Ethernet'
+#   $nm_controlled - optional - defaults to false
 #
 # === Actions:
 #
@@ -44,20 +45,22 @@ define network::bond::dynamic (
   Optional[Enum['yes', 'no']] $defroute = undef,
   Optional[String] $metric = undef,
   Boolean $restart = true,
-  Optional[String] $type = 'Ethernet'
+  Optional[String] $type = 'Ethernet',
+  Boolean $nm_controlled = false,
 ) {
 
   network_if_base { $title:
-    ensure       => $ensure,
-    bootproto    => 'dhcp',
-    mtu          => $mtu,
-    ethtool_opts => $ethtool_opts,
-    bonding_opts => $bonding_opts,
-    zone         => $zone,
-    defroute     => $defroute,
-    metric       => $metric,
-    restart      => $restart,
-    type         => $type,
+    ensure        => $ensure,
+    bootproto     => 'dhcp',
+    mtu           => $mtu,
+    ethtool_opts  => $ethtool_opts,
+    bonding_opts  => $bonding_opts,
+    zone          => $zone,
+    defroute      => $defroute,
+    metric        => $metric,
+    restart       => $restart,
+    type          => $type,
+    nm_controlled => $nm_controlled
   }
 
   # Only install "alias bondN bonding" on old OSs that support
