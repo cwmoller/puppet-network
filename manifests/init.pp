@@ -108,8 +108,8 @@ class network {
 # Copyright (C) 2011 Mike Arnold, unless otherwise noted.
 #
 define network_if_base (
-  Optional[String] $identifier = "Puppet $name",
   Enum['up', 'down'] $ensure,
+  Optional[String] $identifier = "Puppet ${name}",
   Optional[Stdlib::MAC] $macaddress = undef,
   Optional[Stdlib::IP::Address::V4::Nosubnet] $ipaddress = undef,
   Optional[Stdlib::IP::Address::V4::Nosubnet] $netmask = undef,
