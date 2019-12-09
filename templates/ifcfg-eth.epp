@@ -86,4 +86,9 @@ PROMISC=yes
 <% if !$arpcheck { -%>
 ARPCHECK=no
 <% } -%>
-NM_CONTROLLED=<%= bool2str($nm_controlled, 'yes', 'no') %>
+<% if $nm_controlled { -%>
+NM_CONTROLLED=yes
+UUID=<%= $uuid %>
+<% } else { -%>
+NM_CONTROLLED=no
+<% } %>

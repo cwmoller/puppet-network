@@ -232,6 +232,7 @@ define network_if_base (
       arpcheck        => $arpcheck,
       type            => $type,
       nm_controlled   => $nm_controlled,
+      uuid            => fqdn_uuid($interface)
     })
   }
 
